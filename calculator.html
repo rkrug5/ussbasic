@@ -6,9 +6,13 @@
 	<title>USS Calculator</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	 crossorigin="anonymous">
 
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+	 crossorigin="anonymous">
 
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<style>
 		.jumbotron {
@@ -31,7 +35,7 @@
 
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">Navbar</a>
+		<a class="navbar-brand" href="#"><i class="fas fa-donate fa-3x"></i></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
 		 aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -53,42 +57,135 @@
 	</nav>
 
 
+	<div class="container">
 
 
-
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
+		<div class="jumbotron jumbotron-fluid">
+			<!-- <div class="container"> -->
 			<h1 class="display-4"></h1>
 			<p class="lead"></p>
+			<!-- </div> -->
 		</div>
+
+
+
+
+		<div class="main">
+			<h1>Calculate some interest yourself:</h1>
+			<div class="divider">
+			</div>
+			<div>
+				<form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Principal Amount</label>
+						<input type="principal" class="form-control" id="principalInput" aria-describedby="emailHelp" placeholder="$10,000">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Rate (in decimal)</label>
+						<input type="rate" class="form-control" id="rateInput" placeholder="0.05">
+					</div>
+					<div class="form-group">
+						<label class="time" for="exampleCheck1">Time (in years)</label>
+						<input type="rate" class="form-control" id="timeInput" placeholder="20">
+
+					</div>
+					<div class="form-group">
+						<label class="n" for="exampleCheck1">n (number of times compounded per year)</label>
+						<input type="rate" class="form-control" id="nInput" placeholder="12">
+
+					</div>
+					<button type="submit" class="btn btn-primary" id="calculatebtn">Calculate Amount</button>
+
+
+
+
+
+				</form>
+
+				<div class='row'>
+					<div class="col-sm-6">
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">Calculated amount:</h5>
+							</div>
+							<div class="panel-body">
+								<div class="text-center">
+									<h3 id="newAmount"></h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
+	<script>
+
+		let rate = 0
+		let time = 0
+		let principal = 0
+		let amount = 0
+		let n = 1
+
+
+		// document.getElementById("newAmount").innerHTML = amount;
+
+		$("#calculatebtn").on("click", function (event) {
+
+			//prevents page from refreshing
+			event.preventDefault();
 
 
 
-	<div class="main">
-		<h1>Calculate some interest yourself:</h1>
-		<div class="divider">
-		</div>
-		<div>
-			<p>
-				<!-- <img class="catpic" src="assets/images/eatingcheetos.gif" alt="welcome photo" /> -->
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ipsum est, pharetra placerat porttitor ut, sollicitudin vel quam. Aenean
-				eu odio pretium, luctus leo tristique, ullamcorper nisi. Cras et elit faucibus enim finibus euismod. Cras convallis dui urna, a efficitur
-				enim ullamcorper id. Sed tristique aliquam arcu. Sed bibendum metus sed arcu gravida dapibus. Vestibulum id odio sapien. Phasellus porttitor
-				nibh id elit imperdiet, ac dapibus ligula vulputate. Quisque ullamcorper felis orci, vitae gravida sem condimentum vitae. Donec eleifend
-				nibh suscipit ultricies tristique.
-			</p>
-			<p>Vivamus varius finibus mauris, sed faucibus sem condimentum a. Sed erat ex, porttitor eu felis id, euismod efficitur sapien. Nulla nec
-				arcu vestibulum neque egestas pretium eu a quam. Pellentesque blandit egestas consectetur. Nulla volutpat commodo enim, quis ultricies ipsum
-				dapibus ut. Nulla et pharetra enim.
-			</p>
-		</div>
-	</div>
+			principal = $("#principalInput").val();
+			rate = $("#rateInput").val();
+			time = $("#timeInput").val();
+			n = $("#nInput").val();
+
+			console.log(principal);
+			console.log(rate);
+			console.log(time);
+			console.log(n);
 
 
 
 
+
+
+			let x = (rate / n)
+			console.log(x);
+
+			let sum = (1 + x)
+			console.log(sum);
+
+			let power = (n * time)
+			console.log(power);
+
+			let exponential = Math.pow(sum, power)
+			console.log(exponential);
+
+
+
+
+			amount = principal * exponential
+			amount = amount.toFixed(2);
+			document.getElementById("newAmount").innerHTML = amount;
+
+			console.log(amount);
+		});
+
+
+
+
+
+
+
+
+
+	</script>
 
 
 
